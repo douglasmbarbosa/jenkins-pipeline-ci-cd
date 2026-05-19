@@ -37,7 +37,7 @@ pipeline {
         EKS_CLUSTER_PROD = '{{EKS_CLUSTER_PROD}}'
 
         // ID da credencial Git no Jenkins — substitua pelo ID configurado no seu Jenkins
-        CREDENTIAL_ID_BITBUCKET = '{{CREDENTIAL_ID_BITBUCKET}}'
+        CREDENTIAL_ID = '{{CREDENTIAL_ID}}'
 
         // Repositório DevOps — substitua pela URL do seu repositório de infraestrutura
         DEVOPS_REPO_URL    = '{{DEVOPS_REPO_URL}}'
@@ -186,7 +186,7 @@ pipeline {
                     script {
                         echo "Setup Jenkins Job via REST API..."
                         sh """
-                            sed -i 's|{{CREDENTIAL_ID_BITBUCKET}}|${CREDENTIAL_ID_BITBUCKET}|g' \
+                            sed -i 's|{{CREDENTIAL_ID}}|${CREDENTIAL_ID}|g' \
                                 devops-repo/projects/${PROJECT_NAME}/job-config/job-config.xml
                             sed -i 's|{{DEVOPS_REPO_URL}}|${DEVOPS_REPO_URL}|g' \
                                 devops-repo/projects/${PROJECT_NAME}/job-config/job-config.xml
