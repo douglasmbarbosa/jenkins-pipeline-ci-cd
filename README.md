@@ -157,7 +157,6 @@ Shared library principal carregada pelo Jenkinsfile via `load`. Contém todos os
 | `Checkout Source Code`         | Faz checkout do repositório da aplicação na branch especificada            |
 | `SAST Analysis`                | Executa Semgrep e envia relatório ao DefectDojo (skippável)                |
 | `Sonarqube Analysis`           | Executa sonar-scanner com as configurações do projeto (skippável)          |
-| `Create .env file`             | Gera `.env.temp` a partir do ConfigMap e Secret K8s (para build-time)      |
 | `ECR Login`                    | Autentica no Amazon ECR via `aws ecr get-login-password`                   |
 | `Setup Buildx Builder`         | Configura Docker Buildx com driver `docker-container` para cache remoto    |
 | `Build and Push with BuildKit` | Build multi-stage com cache no ECR e push da imagem                        |
