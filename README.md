@@ -51,9 +51,7 @@ Os arquivos de template utilizam placeholders no formato `{{NOME}}` substituído
 | `{{EKS_CLUSTER_DEV}}`             | Nome do cluster EKS de desenvolvimento                                 |
 | `{{EKS_CLUSTER_HML}}`             | Nome do cluster EKS de homologação                                     |
 | `{{EKS_CLUSTER_PROD}}`            | Nome do cluster EKS de produção                                        |
-| `{{CREDENTIAL_ID_BITBUCKET}}`     | ID da credencial Git no Jenkins (para o repositório DevOps)            |
-| `{{CREDENTIAL_ID_BITBUCKET_DEV_HML}}` | ID da credencial Git para dev/hml (checkout da aplicação)          |
-| `{{CREDENTIAL_ID_BITBUCKET_PROD}}`    | ID da credencial Git para prod (checkout da aplicação)             |
+| `{{CREDENTIAL_ID}}`     | ID da credencial Git no Jenkins (para o repositório DevOps)            |            |
 | `{{DEVOPS_REPO_URL}}`             | URL do repositório DevOps (ex: `https://github.com/org/devops.git`)    |
 | `{{DEVOPS_REPO_BRANCH}}`          | Branch do repositório DevOps (ex: `main`, `pipelines`)                 |
 | `{{BASE_DOMAIN}}`                 | Domínio base para os ingresses (ex: `mycompany.com`)                   |
@@ -135,7 +133,7 @@ Pipeline de **onboarding** de novos serviços. Executado **uma única vez** ao c
 
 | Credential ID           | Tipo              | Uso                                    |
 |-------------------------|-------------------|----------------------------------------|
-| `bitbucket-api-token`   | Secret text       | Clone e push no repositório DevOps     |
+| `git-api-token`         | Secret text       | Clone e push no repositório DevOps     |
 | `<git-credential-id>`   | Username/Password | Checkout do código da aplicação        |
 | `jenkins-cli-api-token` | Username/Password | Criação de jobs via API REST           |
 | `defectdojo-token`      | Secret text       | Upload de relatórios SAST              |
@@ -227,7 +225,7 @@ Configuração XML do job Jenkins criado via **API REST** pelo `setup-pipelines.
 
 - **Repositório SCM**: repositório DevOps (branch configurável)
 - **Script path**: `projects/{{PROJECT_NAME}}/jenkinsfile/{{PROJECT_NAME}}.Jenkinsfile`
-- **Credencial**: `{{CREDENTIAL_ID_BITBUCKET}}` (substituído durante o setup)
+- **Credencial**: `{{CREDENTIAL_ID}}` (substituído durante o setup)
 
 > Adapte a URL do repositório DevOps (`<url>`) no arquivo `job-config.xml`.
 
