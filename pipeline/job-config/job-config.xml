@@ -1,0 +1,32 @@
+<?xml version='1.1' encoding='UTF-8'?>
+<flow-definition plugin="workflow-job@2.40">
+  <description>Pipeline for project {{PROJECT_NAME}}</description>
+  <keepDependencies>false</keepDependencies>
+  <properties/>
+  <definition class="org.jenkinsci.plugins.workflow.cps.CpsScmFlowDefinition" plugin="workflow-cps@2.93">
+    <scm class="hudson.plugins.git.GitSCM" plugin="git@4.10.0">
+      <configVersion>2</configVersion>
+      <userRemoteConfigs>
+        <hudson.plugins.git.UserRemoteConfig>
+          <!-- URL do repositório DevOps que contém os Jenkinsfiles — substitua pela URL do seu repositório -->
+          <url>{{DEVOPS_REPO_URL}}</url>
+          <credentialsId>{{CREDENTIAL_ID_BITBUCKET}}</credentialsId>
+        </hudson.plugins.git.UserRemoteConfig>
+      </userRemoteConfigs>
+      <branches>
+        <hudson.plugins.git.BranchSpec>
+          <!-- Branch do repositório DevOps que contém os arquivos de pipeline -->
+          <name>*/{{DEVOPS_REPO_BRANCH}}</name>
+        </hudson.plugins.git.BranchSpec>
+      </branches>
+      <doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>
+      <submoduleCfg class="empty-list"/>
+      <extensions/>
+    </scm>
+    <!-- Caminho do Jenkinsfile dentro do repositório DevOps -->
+    <scriptPath>projects/{{PROJECT_NAME}}/jenkinsfile/{{PROJECT_NAME}}.Jenkinsfile</scriptPath>
+    <lightweight>true</lightweight>
+  </definition>
+  <triggers/>
+  <disabled>false</disabled>
+</flow-definition>
